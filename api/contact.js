@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'api-key': process.env.BREVO_API_KEY,
+        'api-key': (process.env.BREVO_API_KEY || '').replace(/^﻿/, '').trim(),
         'content-type': 'application/json'
       },
       body: JSON.stringify({
