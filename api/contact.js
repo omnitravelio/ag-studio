@@ -25,8 +25,8 @@ export default async function handler(req, res) {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        sender:  { name: 'AG Studio', email: 'alex@agincubate.com' },
-        to:      [{ email: 'alex@agincubate.com', name: 'Alexander' }],
+        sender:  { name: 'AG Studio', email: 'agincubate@gmail.com' },
+        to:      [{ email: 'agincubate@gmail.com', name: 'Alexander' }],
         replyTo: { email, name },
         subject: `New inquiry: ${escape(name)}${business ? ` — ${escape(business)}` : ''}`,
         htmlContent: `
