@@ -343,13 +343,13 @@
     <div class="cta-glow"></div>
     <h2>Ready to get started?</h2>
     <p>Tell me about your business and I'll get back to you within a few hours.</p>
-    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <input type="text"  name="name"    placeholder="Your name"         required />
-      <input type="text"  name="business" placeholder="Business name"    required />
-      <input type="email" name="email"   placeholder="Email address"      required />
-      <textarea           name="message" placeholder="Tell me about your business and what you're looking for..."></textarea>
-      <button type="submit">Send message</button>
-      <p class="form-note">Usually respond within a few hours.</p>
+    <form class="contact-form" id="contact-form">
+      <input type="text"  name="name"     placeholder="Your name"      required autocomplete="name" />
+      <input type="text"  name="business" placeholder="Business name"  autocomplete="organization" />
+      <input type="email" name="email"    placeholder="Email address"  required autocomplete="email" />
+      <textarea           name="message"  placeholder="Tell me about your business and what you're looking for..." rows="4"></textarea>
+      <button type="submit" id="form-btn">Send message</button>
+      <p class="form-note" id="form-status">Usually respond within a few hours.</p>
     </form>
   </section>
 
@@ -572,6 +572,50 @@
       // ── ORB AMBIENT DRIFT ─────────────────────────────────────────
       gsap.to('.hero-orb', { x: 100, y: -70, duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     }
+
+    // ── CONTACT FORM ──────────────────────────────────────────────
+    // Runs regardless of reduced-motion preference
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn    = document.getElementById('form-btn');
+      const status = document.getElementById('form-status');
+      const form   = e.target;
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      status.style.color = '';
+      status.textContent = 'Usually respond within a few hours.';
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name:     form.name.value.trim(),
+            business: form.business.value.trim(),
+            email:    form.email.value.trim(),
+            message:  form.message.value.trim()
+          })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          form.reset();
+          btn.textContent = 'Sent!';
+          status.textContent = "Got it — I'll be in touch within a few hours.";
+          status.style.color = 'var(--blue)';
+          setTimeout(() => { btn.textContent = 'Send message'; btn.disabled = false; }, 4000);
+        } else {
+          throw new Error(data.error || 'Unknown error');
+        }
+      } catch (err) {
+        btn.textContent = 'Send message';
+        btn.disabled = false;
+        status.textContent = err.message || 'Something went wrong. Email alex@agincubate.com directly.';
+        status.style.color = '#e05050';
+      }
+    });
   </script>
 
 </body>
