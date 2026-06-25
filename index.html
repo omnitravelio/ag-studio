@@ -6,7 +6,7 @@
   <title>Alexander Gross — Web Design Lafayette, IN</title>
   <meta name="description" content="Premium websites for Lafayette businesses. Designed to convert, optimized for search, and live in 48 hours. Starting at $600." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -523,6 +523,84 @@
 
       magnetic('.demo-card', 8);
       magnetic('.price-card', 6);
+
+      // ── PARTICLE CANVAS (hero ambient background) ─────────────────
+      // Replaces static CSS grid with live floating blue particles.
+      // Larger particles get a radial glow. Mouse causes subtle repulsion.
+      const cvs = document.createElement('canvas');
+      const ctx = cvs.getContext('2d');
+      cvs.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+      document.querySelector('.hero-bg').prepend(cvs);
+
+      let W, H;
+      const isMob = window.innerWidth < 768;
+      const N = isMob ? 90 : 300;
+      let mouse = { x: -9999, y: -9999 };
+
+      function resize() {
+        W = cvs.width  = cvs.offsetWidth;
+        H = cvs.height = cvs.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const pts = Array.from({ length: N }, () => ({
+        x:  Math.random() * (W || 1400),
+        y:  Math.random() * (H || 800),
+        r:  0.5 + Math.random() * 2.2,
+        a:  0.12 + Math.random() * 0.62,
+        dx: (Math.random() - 0.5) * 0.18,
+        dy: (Math.random() - 0.5) * 0.18,
+        ph: Math.random() * Math.PI * 2
+      }));
+
+      const hero = document.querySelector('.hero');
+      hero.addEventListener('mousemove', e => {
+        const r = cvs.getBoundingClientRect();
+        mouse.x = e.clientX - r.left;
+        mouse.y = e.clientY - r.top;
+      });
+      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+      let t = 0;
+      (function draw() {
+        ctx.clearRect(0, 0, W, H);
+        t += 0.005;
+
+        for (const p of pts) {
+          const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+          const md  = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (md < 160 && md > 0) {
+            const f = (160 - md) / 160 * 0.7;
+            p.x += (mdx / md) * f;
+            p.y += (mdy / md) * f;
+          }
+
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.x < -8) p.x = W + 8; else if (p.x > W + 8) p.x = -8;
+          if (p.y < -8) p.y = H + 8; else if (p.y > H + 8) p.y = -8;
+
+          const alpha = p.a * (0.65 + 0.35 * Math.sin(t + p.ph));
+
+          if (p.r > 1.4) {
+            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 7);
+            g.addColorStop(0, `rgba(82,129,255,${(alpha * 0.28).toFixed(3)})`);
+            g.addColorStop(1, 'rgba(82,129,255,0)');
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r * 7, 0, Math.PI * 2);
+            ctx.fillStyle = g;
+            ctx.fill();
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(82,129,255,${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      })();
 
       // ── ORB AMBIENT DRIFT ─────────────────────────────────────────
       gsap.to('.hero-orb', { x: 100, y: -70, duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1 });
