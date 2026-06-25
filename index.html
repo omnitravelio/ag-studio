@@ -297,7 +297,7 @@
           <li>Live in 48 hours</li>
           <li>2 rounds of revisions</li>
         </ul>
-        <a href="#contact" class="price-cta outline">Get started</a>
+        <button class="price-cta outline" data-plan="starter">Get started</button>
         <p class="price-turnaround">Live in 48 hrs</p>
       </div>
 
@@ -315,7 +315,7 @@
           <li>Google Analytics setup</li>
           <li>3 rounds of revisions</li>
         </ul>
-        <a href="#contact" class="price-cta solid">Get started</a>
+        <button class="price-cta solid" data-plan="standard">Get started</button>
         <p class="price-turnaround">Live in 72 hrs</p>
       </div>
 
@@ -331,7 +331,7 @@
           <li>Priority response time</li>
           <li>Security &amp; uptime monitoring</li>
         </ul>
-        <a href="#contact" class="price-cta outline">Add to any plan</a>
+        <button class="price-cta outline" data-plan="growth">Add to any plan</button>
         <p class="price-turnaround">Billed monthly</p>
       </div>
 
@@ -616,6 +616,44 @@
         status.style.color = '#e05050';
       }
     });
+    // ── STRIPE CHECKOUT ──────────────────────────────────────────
+    document.querySelectorAll('[data-plan]').forEach(btn => {
+      btn.addEventListener('click', async function() {
+        const plan = this.dataset.plan;
+        const orig = this.textContent;
+        this.textContent = 'Loading...';
+        this.disabled = true;
+        try {
+          const res  = await fetch('/api/checkout', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ plan })
+          });
+          const data = await res.json();
+          if (res.ok && data.url) {
+            window.location.href = data.url;
+          } else {
+            alert(data.error || 'Something went wrong. Try again.');
+            this.textContent = orig;
+            this.disabled = false;
+          }
+        } catch {
+          alert('Something went wrong. Try again.');
+          this.textContent = orig;
+          this.disabled = false;
+        }
+      });
+    });
+
+    // ── PAYMENT SUCCESS TOAST ─────────────────────────────────────
+    if (new URLSearchParams(location.search).get('payment') === 'success') {
+      const toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--blue);color:#000;font-weight:700;font-size:14px;padding:14px 28px;border-radius:100px;z-index:999;box-shadow:0 8px 32px rgba(245,164,32,0.4);';
+      toast.textContent = 'Payment received — I\'ll be in touch within a few hours.';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 6000);
+      history.replaceState({}, '', '/');
+    }
   </script>
 
 </body>
