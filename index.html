@@ -493,81 +493,24 @@
       magnetic('.demo-card', 8);
       magnetic('.price-card', 6);
 
-      // ── STARFIELD CANVAS (fixed full-page, always behind content) ──
-      // Gold particles drift across entire page. Mouse anywhere repels them.
-      // Position: fixed so it doesn't scroll — the stars stay as you move.
-      const starWrap = document.createElement('div');
-      starWrap.style.cssText = 'position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;';
-      document.body.prepend(starWrap);
+      // ── SPINNING BACKGROUND (conic gradient rotates with scroll) ─
+      const spinWrap = document.createElement('div');
+      spinWrap.className = 'bg-spin-wrap';
+      const spinA = document.createElement('div');
+      spinA.className = 'bg-spin-a';
+      const spinB = document.createElement('div');
+      spinB.className = 'bg-spin-b';
+      spinWrap.append(spinA, spinB);
+      document.body.prepend(spinWrap);
 
-      const cvs = document.createElement('canvas');
-      const ctx = cvs.getContext('2d');
-      cvs.style.cssText = 'width:100%;height:100%;';
-      starWrap.appendChild(cvs);
-
-      let W, H;
-      const isMob = window.innerWidth < 768;
-      const N = isMob ? 120 : 420;
-      let mouse = { x: -9999, y: -9999 };
-
-      function resize() {
-        W = cvs.width  = window.innerWidth;
-        H = cvs.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      const pts = Array.from({ length: N }, () => ({
-        x:  Math.random() * (W || 1400),
-        y:  Math.random() * (H || 900),
-        r:  0.4 + Math.random() * 2.0,
-        a:  0.08 + Math.random() * 0.52,
-        dx: (Math.random() - 0.5) * 0.14,
-        dy: (Math.random() - 0.5) * 0.14,
-        ph: Math.random() * Math.PI * 2
-      }));
-
-      window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-      let t = 0;
-      (function draw() {
-        ctx.clearRect(0, 0, W, H);
-        t += 0.004;
-
-        for (const p of pts) {
-          const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
-          const md  = Math.sqrt(mdx * mdx + mdy * mdy);
-          if (md < 150 && md > 0) {
-            const f = (150 - md) / 150 * 0.6;
-            p.x += (mdx / md) * f;
-            p.y += (mdy / md) * f;
-          }
-
-          p.x += p.dx;
-          p.y += p.dy;
-          if (p.x < -8) p.x = W + 8; else if (p.x > W + 8) p.x = -8;
-          if (p.y < -8) p.y = H + 8; else if (p.y > H + 8) p.y = -8;
-
-          const alpha = p.a * (0.6 + 0.4 * Math.sin(t + p.ph));
-
-          if (p.r > 1.3) {
-            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 7);
-            g.addColorStop(0, `rgba(245,164,32,${(alpha * 0.22).toFixed(3)})`);
-            g.addColorStop(1, 'rgba(245,164,32,0)');
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r * 7, 0, Math.PI * 2);
-            ctx.fillStyle = g;
-            ctx.fill();
-          }
-
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(245,164,32,${alpha.toFixed(3)})`;
-          ctx.fill();
-        }
-
-        requestAnimationFrame(draw);
-      })();
+      gsap.to(spinA, {
+        rotation: 80, ease: 'none',
+        scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1.5 }
+      });
+      gsap.to(spinB, {
+        rotation: -38, ease: 'none',
+        scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 2.0 }
+      });
 
       // ── ORB AMBIENT DRIFT ─────────────────────────────────────────
       gsap.to('.hero-orb', { x: 100, y: -70, duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1 });
@@ -648,7 +591,7 @@
     // ── PAYMENT SUCCESS TOAST ─────────────────────────────────────
     if (new URLSearchParams(location.search).get('payment') === 'success') {
       const toast = document.createElement('div');
-      toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--blue);color:#000;font-weight:700;font-size:14px;padding:14px 28px;border-radius:100px;z-index:999;box-shadow:0 8px 32px rgba(245,164,32,0.4);';
+      toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-weight:700;font-size:14px;padding:14px 28px;border-radius:100px;z-index:999;box-shadow:0 8px 32px rgba(234,88,12,0.4);';
       toast.textContent = 'Payment received — I\'ll be in touch within a few hours.';
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 6000);

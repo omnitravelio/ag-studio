@@ -1,22 +1,22 @@
 /* ============================================
-   AG Studio — midnight black, warm gold
+   AG Studio — warm charcoal, terracotta orange
    ============================================ */
 
 :root {
-  --bg:    #060504;
-  --bg2:   #0e0c09;
-  --surface: rgba(245, 164, 32, 0.05);
-  --border:  rgba(245, 164, 32, 0.08);
-  --border-s: rgba(245, 164, 32, 0.15);
+  --bg:    #0c0907;
+  --bg2:   #131009;
+  --surface: rgba(234, 88, 12, 0.05);
+  --border:  rgba(234, 88, 12, 0.08);
+  --border-s: rgba(234, 88, 12, 0.16);
 
-  --text1: #f5f0e8;
-  --text2: #7a6a50;
-  --text3: #3d3020;
+  --text1: #faf7f2;
+  --text2: #78716c;
+  --text3: #57534e;
 
-  --blue:        #f5a420;
-  --blue-bright: #f7c050;
-  --blue-deep:   #c47a10;
-  --blue-muted:  rgba(245, 164, 32, 0.10);
+  --blue:        #ea580c;
+  --blue-bright: #f97316;
+  --blue-deep:   #c2410c;
+  --blue-muted:  rgba(234, 88, 12, 0.10);
 
   --radius: 16px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -57,7 +57,7 @@ nav {
   align-items: center;
   padding: 0 48px;
   height: 56px;
-  background: rgba(4, 5, 10, 0.88);
+  background: rgba(12, 9, 7, 0.88);
   backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
@@ -125,8 +125,8 @@ nav a:hover { color: var(--text1); }
   left: -50%;
   top: 42%;
   background-image:
-    linear-gradient(rgba(245, 164, 32, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 164, 32, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(234, 88, 12, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(234, 88, 12, 0.04) 1px, transparent 1px);
   background-size: 68px 68px;
   transform: perspective(400px) rotateX(65deg);
   transform-origin: top center;
@@ -139,7 +139,7 @@ nav a:hover { color: var(--text1); }
   position: absolute;
   width: 700px;
   height: 600px;
-  background: radial-gradient(ellipse, rgba(245, 164, 32, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(234, 88, 12, 0.10) 0%, transparent 70%);
   top: -160px;
   left: -180px;
   filter: blur(80px);
@@ -623,8 +623,8 @@ section.block {
   position: relative;
 }
 .price-card.featured {
-  border-color: rgba(82, 129, 255, 0.4);
-  background: linear-gradient(160deg, rgba(82,129,255,0.07) 0%, var(--bg2) 100%);
+  border-color: rgba(234, 88, 12, 0.30);
+  background: linear-gradient(160deg, rgba(234,88,12,0.07) 0%, var(--bg2) 100%);
 }
 .price-card.featured::before {
   content: 'Most popular';
@@ -731,7 +731,7 @@ section.block {
 .cta-glow {
   position: absolute;
   width: 700px; height: 500px;
-  background: radial-gradient(ellipse, rgba(245,164,32,0.07) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(234,88,12,0.08) 0%, transparent 70%);
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   filter: blur(60px);
@@ -785,7 +785,7 @@ section.block {
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(82,129,255,0.12);
+  box-shadow: 0 0 0 3px rgba(234,88,12,0.12);
 }
 .contact-form textarea { height: 100px; }
 .contact-form button {
@@ -818,6 +818,51 @@ footer {
   border-top: 1px solid var(--border);
 }
 footer p { font-size: 12px; color: var(--text3); font-weight: 400; }
+
+/* ---------- SPINNING BACKGROUND ---------- */
+.bg-spin-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-spin-a,
+.bg-spin-b {
+  position: absolute;
+  top: -50vh;
+  left: -50vw;
+  width: 200vw;
+  height: 200vh;
+  will-change: transform;
+}
+
+.bg-spin-a {
+  background: conic-gradient(
+    from 0deg at 30% 30%,
+    transparent 0%,
+    rgba(234, 88, 12, 0.13) 7%,
+    rgba(234, 88, 12, 0.06) 14%,
+    transparent 22%,
+    transparent 48%,
+    rgba(234, 88, 12, 0.10) 60%,
+    rgba(249, 115, 22, 0.06) 67%,
+    transparent 76%,
+    transparent 100%
+  );
+  filter: blur(100px);
+}
+
+.bg-spin-b {
+  background: radial-gradient(
+    ellipse 52% 46% at 65% 70%,
+    rgba(249, 115, 22, 0.09) 0%,
+    rgba(234, 88, 12, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(80px);
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
