@@ -493,24 +493,99 @@
       magnetic('.demo-card', 8);
       magnetic('.price-card', 6);
 
-      // ── SPINNING BACKGROUND (conic gradient rotates with scroll) ─
-      const spinWrap = document.createElement('div');
-      spinWrap.className = 'bg-spin-wrap';
-      const spinA = document.createElement('div');
-      spinA.className = 'bg-spin-a';
-      const spinB = document.createElement('div');
-      spinB.className = 'bg-spin-b';
-      spinWrap.append(spinA, spinB);
-      document.body.prepend(spinWrap);
+      // ── ORBITAL RINGS BACKGROUND ─────────────────────────────────
+      // Canvas rings: partial arcs that auto-rotate + spin with scroll.
+      // Canvas + ctx.shadowBlur avoids the GPU overdraw of CSS blur on huge divs.
+      const bgCvs = document.createElement('canvas');
+      bgCvs.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
+      document.body.prepend(bgCvs);
+      const bgCtx = bgCvs.getContext('2d');
 
-      gsap.to(spinA, {
-        rotation: 80, ease: 'none',
-        scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 1.5 }
-      });
-      gsap.to(spinB, {
-        rotation: -38, ease: 'none',
-        scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 2.0 }
-      });
+      let bW, bH;
+      function bgResize() { bW = bgCvs.width = window.innerWidth; bH = bgCvs.height = window.innerHeight; }
+      bgResize();
+      window.addEventListener('resize', bgResize);
+
+      // rf = radius fraction of min(bW,bH), scrollRot = full-page rotation in turns,
+      // base = starting angle offset, arc = fraction of circle drawn,
+      // lw = line width, a = base opacity, rate = auto-rotation speed (rad/frame)
+      const orbitRings = [
+        { rf: 0.18, scrollRot:  2.0, base: 0.0, arc: 0.60, lw: 0.8, hex: '#fb923c', a: 0.38, rate:  0.0007 },
+        { rf: 0.30, scrollRot: -1.5, base: 0.8, arc: 0.55, lw: 1.0, hex: '#f97316', a: 0.30, rate: -0.0005 },
+        { rf: 0.44, scrollRot:  1.2, base: 1.8, arc: 0.50, lw: 1.2, hex: '#ea580c', a: 0.24, rate:  0.0003 },
+        { rf: 0.60, scrollRot: -0.8, base: 3.0, arc: 0.42, lw: 1.5, hex: '#f97316', a: 0.17, rate: -0.0002 },
+        { rf: 0.78, scrollRot:  0.5, base: 2.2, arc: 0.33, lw: 1.8, hex: '#c2410c', a: 0.11, rate:  0.0001 },
+      ];
+
+      let bFrame = 0;
+      (function bgDraw() {
+        bgCtx.clearRect(0, 0, bW, bH);
+        bFrame++;
+
+        const cx  = bW * 0.5;
+        const cy  = bH * 0.42;
+        const base = Math.min(bW, bH);
+        const sf  = window.scrollY / Math.max(1, document.body.scrollHeight - bH);
+
+        // Center glow dot
+        const cg = bgCtx.createRadialGradient(cx, cy, 0, cx, cy, base * 0.04);
+        cg.addColorStop(0, 'rgba(249,115,22,0.55)');
+        cg.addColorStop(1, 'rgba(249,115,22,0)');
+        bgCtx.beginPath();
+        bgCtx.arc(cx, cy, base * 0.04, 0, Math.PI * 2);
+        bgCtx.fillStyle = cg;
+        bgCtx.fill();
+
+        for (const r of orbitRings) {
+          const rad    = base * r.rf;
+          const angle  = r.base + bFrame * r.rate + sf * r.scrollRot * Math.PI * 2;
+          const arcEnd = angle + r.arc * Math.PI * 2;
+
+          // Glow pass
+          bgCtx.save();
+          bgCtx.shadowBlur  = 18;
+          bgCtx.shadowColor = r.hex;
+          bgCtx.globalAlpha = r.a * 0.65;
+          bgCtx.strokeStyle = r.hex;
+          bgCtx.lineWidth   = r.lw + 2.5;
+          bgCtx.lineCap     = 'round';
+          bgCtx.beginPath();
+          bgCtx.arc(cx, cy, rad, angle, arcEnd);
+          bgCtx.stroke();
+
+          // Core pass
+          bgCtx.shadowBlur  = 0;
+          bgCtx.globalAlpha = r.a;
+          bgCtx.lineWidth   = r.lw;
+          bgCtx.beginPath();
+          bgCtx.arc(cx, cy, rad, angle, arcEnd);
+          bgCtx.stroke();
+          bgCtx.restore();
+        }
+
+        // Tick marks on outer two rings (astrolabe / navigational instrument feel)
+        [orbitRings[3], orbitRings[4]].forEach(r => {
+          const rad   = base * r.rf;
+          const angle = r.base + bFrame * r.rate + sf * r.scrollRot * Math.PI * 2;
+          const ticks = r === orbitRings[4] ? 60 : 36;
+          bgCtx.save();
+          bgCtx.strokeStyle = r.hex;
+          for (let i = 0; i < ticks; i++) {
+            const ta      = angle + (i / ticks) * Math.PI * 2;
+            const isMaj   = i % (ticks / 12) === 0;
+            const innerR  = rad * (isMaj ? 0.93 : 0.97);
+            bgCtx.globalAlpha = r.a * (isMaj ? 0.65 : 0.35);
+            bgCtx.lineWidth   = isMaj ? 1.2 : 0.5;
+            bgCtx.beginPath();
+            bgCtx.moveTo(cx + Math.cos(ta) * innerR, cy + Math.sin(ta) * innerR);
+            bgCtx.lineTo(cx + Math.cos(ta) * rad,    cy + Math.sin(ta) * rad);
+            bgCtx.stroke();
+          }
+          bgCtx.restore();
+        });
+
+        requestAnimationFrame(bgDraw);
+      })();
 
       // ── ORB AMBIENT DRIFT ─────────────────────────────────────────
       gsap.to('.hero-orb', { x: 100, y: -70, duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1 });
