@@ -1,22 +1,22 @@
 /* ============================================
-   AG Studio — warm charcoal, terracotta orange
+   AG Studio — deep navy, fire orange
    ============================================ */
 
 :root {
-  --bg:    #0c0907;
-  --bg2:   #131009;
-  --surface: rgba(234, 88, 12, 0.05);
-  --border:  rgba(234, 88, 12, 0.08);
-  --border-s: rgba(234, 88, 12, 0.16);
+  --bg:    #060810;
+  --bg2:   #0a0d1a;
+  --surface: rgba(249, 115, 22, 0.05);
+  --border:  rgba(249, 115, 22, 0.08);
+  --border-s: rgba(249, 115, 22, 0.18);
 
-  --text1: #faf7f2;
-  --text2: #78716c;
-  --text3: #57534e;
+  --text1: #f0f2ff;
+  --text2: #6b7a96;
+  --text3: #3d4a60;
 
-  --blue:        #ea580c;
-  --blue-bright: #f97316;
-  --blue-deep:   #c2410c;
-  --blue-muted:  rgba(234, 88, 12, 0.10);
+  --blue:        #f97316;
+  --blue-bright: #fb923c;
+  --blue-deep:   #ea580c;
+  --blue-muted:  rgba(249, 115, 22, 0.10);
 
   --radius: 16px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -57,7 +57,7 @@ nav {
   align-items: center;
   padding: 0 48px;
   height: 56px;
-  background: rgba(12, 9, 7, 0.88);
+  background: rgba(6, 8, 16, 0.88);
   backdrop-filter: blur(24px) saturate(160%);
   border-bottom: 1px solid var(--border);
 }
@@ -125,8 +125,8 @@ nav a:hover { color: var(--text1); }
   left: -50%;
   top: 42%;
   background-image:
-    linear-gradient(rgba(234, 88, 12, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(234, 88, 12, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(249, 115, 22, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.04) 1px, transparent 1px);
   background-size: 68px 68px;
   transform: perspective(400px) rotateX(65deg);
   transform-origin: top center;
@@ -139,7 +139,7 @@ nav a:hover { color: var(--text1); }
   position: absolute;
   width: 700px;
   height: 600px;
-  background: radial-gradient(ellipse, rgba(234, 88, 12, 0.10) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(249, 115, 22, 0.10) 0%, transparent 70%);
   top: -160px;
   left: -180px;
   filter: blur(80px);
@@ -623,8 +623,8 @@ section.block {
   position: relative;
 }
 .price-card.featured {
-  border-color: rgba(234, 88, 12, 0.30);
-  background: linear-gradient(160deg, rgba(234,88,12,0.07) 0%, var(--bg2) 100%);
+  border-color: rgba(249, 115, 22, 0.28);
+  background: linear-gradient(160deg, rgba(249,115,22,0.07) 0%, var(--bg2) 100%);
 }
 .price-card.featured::before {
   content: 'Most popular';
@@ -731,7 +731,7 @@ section.block {
 .cta-glow {
   position: absolute;
   width: 700px; height: 500px;
-  background: radial-gradient(ellipse, rgba(234,88,12,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(249,115,22,0.08) 0%, transparent 70%);
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   filter: blur(60px);
@@ -785,7 +785,7 @@ section.block {
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(234,88,12,0.12);
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
 }
 .contact-form textarea { height: 100px; }
 .contact-form button {
