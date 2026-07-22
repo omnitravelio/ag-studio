@@ -7,288 +7,245 @@
   <meta name="description" content="I build and launch digital products for creators who have an audience but nothing to sell. The product, the sales page, the emails, and the content to launch it." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
   <div class="scroll-bar"></div>
+  <a class="skip" href="#main">Skip to content</a>
 
   <nav>
     <span class="logo">AG<span>.</span></span>
     <div class="nav-right">
+      <a href="#kit">What you get</a>
       <a href="#work">Work</a>
-      <a href="#services">What I build</a>
       <a href="#contact" class="nav-cta">Start a project</a>
     </div>
   </nav>
 
+  <main id="main">
+
   <!-- ============================ HERO ============================ -->
   <section class="hero">
-    <div class="hero-bg">
-      <div class="grid-floor"></div>
-      <div class="hero-orb"></div>
-    </div>
-
-    <div class="hero-left">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        Taking projects for August
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <span class="tag-dot"></span>
+        <span class="mono">Taking projects for August</span>
       </div>
-      <h1>You built the audience. You have <em>nothing to sell them.</em></h1>
+
+      <h1>
+        You built the audience.<br>
+        You have <em>nothing to sell them.</em>
+      </h1>
+
       <p class="hero-sub">
         I build and launch digital products for creators. The product itself, the page that
-        sells it, the emails, and the content to launch it. Usually inside a week.
+        sells it, the emails, and the content to launch it.
       </p>
+
       <div class="hero-ctas">
-        <a href="#work" class="btn-primary">See a full build</a>
-        <a href="#contact" class="btn-ghost">Start a project &rarr;</a>
+        <a href="#contact" class="btn">Start a project</a>
+        <a href="#work" class="btn-quiet">See a full build <span>&rarr;</span></a>
       </div>
-    </div>
 
-    <div class="hero-right">
-      <div class="browser-wrap">
-        <div class="browser-frame">
-          <div class="browser-bar">
-            <span class="b-dot b-r"></span>
-            <span class="b-dot b-y"></span>
-            <span class="b-dot b-g"></span>
-            <span class="browser-url">groundwork &middot; sales page</span>
+      <dl class="hero-facts">
+        <div><dt class="mono">Deliverables</dt><dd class="mono">4</dd></div>
+        <div><dt class="mono">Turnaround</dt><dd class="mono">~1 week</dd></div>
+        <div><dt class="mono">From</dt><dd class="mono">$600</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ==================== SIGNATURE: THE KIT SEQUENCER ==================== -->
+  <section class="kit" id="kit">
+    <div class="wrap">
+      <div class="kit-head">
+        <div>
+          <p class="eyebrow mono">What you actually get</p>
+          <h2>Four pieces. <em>Click through them.</em></h2>
+        </div>
+        <p class="kit-lede">
+          Most people will sell you one of these and call it a launch. A product with no page
+          is a file. A page with no traffic is a URL. You need all four or none of it moves.
+        </p>
+      </div>
+
+      <div class="seq">
+        <div class="seq-rail" role="tablist" aria-label="Launch kit deliverables">
+          <button class="seq-tab is-on" role="tab" aria-selected="true" data-i="0">
+            <span class="mono seq-n">01</span>
+            <span class="seq-t">The product</span>
+            <span class="seq-d">The thing they buy</span>
+          </button>
+          <button class="seq-tab" role="tab" aria-selected="false" data-i="1">
+            <span class="mono seq-n">02</span>
+            <span class="seq-t">The sales page</span>
+            <span class="seq-d">Where they buy it</span>
+          </button>
+          <button class="seq-tab" role="tab" aria-selected="false" data-i="2">
+            <span class="mono seq-n">03</span>
+            <span class="seq-t">The emails</span>
+            <span class="seq-d">How you launch it</span>
+          </button>
+          <button class="seq-tab" role="tab" aria-selected="false" data-i="3">
+            <span class="mono seq-n">04</span>
+            <span class="seq-t">The content</span>
+            <span class="seq-d">How they hear about it</span>
+          </button>
+        </div>
+
+        <div class="seq-stage">
+          <figure class="seq-shot">
+            <img id="seqImg" src="assets/cs-program.jpeg" alt="The GROUNDWORK program document" />
+          </figure>
+          <div class="seq-info">
+            <p class="mono seq-label" id="seqLabel">01 &middot; The product</p>
+            <p class="seq-copy" id="seqCopy">
+              Forty-eight training sessions, written out in full and designed to look like
+              something worth paying for. Prints to a clean PDF, which is what the buyer
+              downloads.
+            </p>
+            <a class="seq-link" id="seqLink" href="https://groundwork-demo-gamma.vercel.app/program.html" target="_blank" rel="noopener">
+              Open the real one <span>&rarr;</span>
+            </a>
           </div>
-          <img src="assets/cs-sales.jpeg" alt="The GROUNDWORK sales page, showing the headline and program specification panel" class="shot" width="1440" height="900" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================ STATS ============================ -->
-  <div class="stats-band">
-    <div class="stat-item">
-      <div class="stat-num">4 parts</div>
-      <div class="stat-label">Product, sales page, email sequence, launch content</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">~1 week</div>
-      <div class="stat-label">Typical turnaround from brief to something you can sell</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">from $600</div>
-      <div class="stat-label">Scoped and quoted before you pay anything</div>
-    </div>
-  </div>
-
-  <!-- ============================ PROBLEM ============================ -->
-  <section class="block" id="why">
-    <div class="split-lead">
-      <div>
-        <div class="eyebrow">The gap</div>
-        <h2 class="section-h">Your comments are full of people asking to buy something.</h2>
-      </div>
-      <div class="lead-body">
-        <p>
-          You post consistently. People save it, share it, and ask the same question in every
-          comment section: is there a program, is there a course, where do I get this.
-        </p>
-        <p>
-          And there's nothing to send them, because building the product is a completely
-          different job to making the content. It's weeks of writing, a page you don't know how
-          to build, a checkout you don't want to set up, and a launch you have to plan.
-        </p>
-        <p>
-          So it stays on the list. Meanwhile the audience you spent two years building is
-          worth exactly what it was worth last year.
-        </p>
-        <p><strong>That's the entire job I do.</strong></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ WORK / CASE STUDY ============================ -->
+  <!-- ============================ WORK ============================ -->
   <section class="block" id="work">
-    <div class="eyebrow">A full build</div>
-    <h2 class="section-h">GROUNDWORK</h2>
-    <p class="section-p">
-      A twelve week strength program for a women's fitness creator, built end to end.
-      Product, page, emails, launch content. <span class="tag-concept">Concept build</span>
-    </p>
+    <div class="wrap">
+      <p class="eyebrow mono">A full build</p>
+      <h2 class="big">GROUNDWORK <span class="chip mono">Concept build</span></h2>
+      <p class="lede">
+        A twelve week strength program for a women's fitness creator. Product, page, emails,
+        launch content, built end to end in a week.
+      </p>
 
-    <div class="cs">
-      <div class="cs-meta">
-        <div class="cs-meta-row"><span>Client</span><span>Fitness creator, ~30K followers</span></div>
-        <div class="cs-meta-row"><span>Problem</span><span>No product, no page, no list</span></div>
-        <div class="cs-meta-row"><span>Product</span><span>12 week program, $67</span></div>
-        <div class="cs-meta-row"><span>Delivered</span><span>4 pieces, one week</span></div>
+      <div class="cs">
+        <dl class="cs-meta">
+          <div><dt class="mono">Client</dt><dd>Fitness creator, ~30K followers</dd></div>
+          <div><dt class="mono">Problem</dt><dd>No product, no page, no list</dd></div>
+          <div><dt class="mono">Product</dt><dd>12 week program at $67</dd></div>
+          <div><dt class="mono">Delivered</dt><dd>Four pieces, one week</dd></div>
+        </dl>
+        <div class="cs-body">
+          <p>
+            Her audience had been asking for a program for a year. The obstacle was never
+            demand, it was that she would have to write forty-eight sessions, build a page,
+            set up payments and plan a launch.
+          </p>
+          <p>
+            Her buyer had also already bought one bad $40 PDF and resented it. So the whole
+            build is designed around a single problem: <em class="ital">proving it isn't another PDF
+            before she pays.</em> The page shows a real session out of week 7, and an
+            interactive demo that runs the progression rule in front of you.
+          </p>
+        </div>
       </div>
 
-      <div class="cs-body">
-        <p>
-          Her audience had been asking for a program for a year. The obstacle was never
-          demand, it was that she'd have to write forty-eight training sessions, build a page,
-          set up payments, and plan a launch.
-        </p>
-        <p>
-          Her buyer had also already bought one bad $40 PDF and resented it, so the whole build
-          is designed around one problem: <strong>proving it isn't another PDF before she pays.</strong>
-          The sales page shows a real session out of week 7, and an interactive demo that runs
-          the progression rule in front of you.
-        </p>
+      <div class="cs-grid">
+        <a class="cs-card cs-wide" href="https://groundwork-demo-gamma.vercel.app" target="_blank" rel="noopener">
+          <div class="cs-shot"><img src="assets/cs-sales.jpeg" alt="The GROUNDWORK sales page" loading="lazy" /></div>
+          <div class="cs-cap">
+            <span class="mono cs-n">01</span>
+            <div><strong>The sales page</strong><span>Live, with an interactive progression demo</span></div>
+            <span class="mono cs-go">Open &rarr;</span>
+          </div>
+        </a>
+        <a class="cs-card" href="https://groundwork-demo-gamma.vercel.app/program.html" target="_blank" rel="noopener">
+          <div class="cs-shot"><img src="assets/cs-program.jpeg" alt="The GROUNDWORK program document" loading="lazy" /></div>
+          <div class="cs-cap">
+            <span class="mono cs-n">02</span>
+            <div><strong>The product</strong><span>48 sessions, print-ready</span></div>
+            <span class="mono cs-go">Open &rarr;</span>
+          </div>
+        </a>
+        <a class="cs-card" href="https://groundwork-demo-gamma.vercel.app/kit.html" target="_blank" rel="noopener">
+          <div class="cs-shot"><img src="assets/cs-kit.jpeg" alt="The GROUNDWORK launch kit" loading="lazy" /></div>
+          <div class="cs-cap">
+            <span class="mono cs-n">03</span>
+            <div><strong>The launch</strong><span>5 emails, 10 content scripts</span></div>
+            <span class="mono cs-go">Open &rarr;</span>
+          </div>
+        </a>
       </div>
+
+      <p class="fine">
+        GROUNDWORK is a concept brand built to show the format end to end. It is not a real
+        client and it is not for sale. Everything you see is the quality you would receive.
+      </p>
     </div>
-
-    <div class="cs-grid">
-      <a class="cs-card cs-wide" href="https://groundwork-demo-gamma.vercel.app" target="_blank" rel="noopener">
-        <div class="cs-shot"><img src="assets/cs-sales.jpeg" alt="GROUNDWORK sales page" loading="lazy" /></div>
-        <div class="cs-cap">
-          <span class="cs-n">01</span>
-          <div>
-            <strong>The sales page</strong>
-            <span>Live, with an interactive progression demo</span>
-          </div>
-          <span class="cs-go">Open &rarr;</span>
-        </div>
-      </a>
-
-      <a class="cs-card" href="https://groundwork-demo-gamma.vercel.app/program.html" target="_blank" rel="noopener">
-        <div class="cs-shot"><img src="assets/cs-program.jpeg" alt="The GROUNDWORK program document" loading="lazy" /></div>
-        <div class="cs-cap">
-          <span class="cs-n">02</span>
-          <div>
-            <strong>The product</strong>
-            <span>48 sessions, print-ready to PDF</span>
-          </div>
-          <span class="cs-go">Open &rarr;</span>
-        </div>
-      </a>
-
-      <a class="cs-card" href="https://groundwork-demo-gamma.vercel.app/kit.html" target="_blank" rel="noopener">
-        <div class="cs-shot"><img src="assets/cs-kit.jpeg" alt="The GROUNDWORK launch kit, emails and content scripts" loading="lazy" /></div>
-        <div class="cs-cap">
-          <span class="cs-n">03</span>
-          <div>
-            <strong>The launch</strong>
-            <span>5 emails, 10 content scripts</span>
-          </div>
-          <span class="cs-go">Open &rarr;</span>
-        </div>
-      </a>
-    </div>
-
-    <p class="cs-note">
-      GROUNDWORK is a concept brand I built to show the format end to end. It is not a real
-      client and it is not for sale. Everything you see is the actual quality you'd receive.
-    </p>
   </section>
 
   <!-- ============================ SERVICES ============================ -->
-  <section class="block" id="services">
-    <div class="eyebrow">What I build</div>
-    <h2 class="section-h">Three things, or something else entirely.</h2>
-    <p class="section-p">
-      Every project is scoped and quoted before you pay anything. The prices below are where
-      each one starts.
-    </p>
+  <section class="block alt" id="services">
+    <div class="wrap">
+      <p class="eyebrow mono">What I build</p>
+      <h2 class="big">Three things, <em>or something else entirely.</em></h2>
+      <p class="lede">
+        Every project is scoped and quoted before you pay anything. These are starting points,
+        not fixed prices, because the work genuinely varies.
+      </p>
 
-    <div class="svc-grid">
-      <div class="svc">
-        <div class="svc-top">
-          <span class="svc-n">01</span>
-          <span class="svc-price">from $600</span>
-        </div>
-        <h3>Product build</h3>
-        <p>The thing your audience buys. A training program, a course, a guide, a template pack. Written properly and designed to look like it's worth paying for.</p>
-        <ul>
-          <li>Full product, written and designed</li>
-          <li>Print-ready PDF or hosted document</li>
-          <li>Two revision rounds</li>
-        </ul>
-      </div>
+      <div class="svc-list">
+        <article class="svc">
+          <span class="mono svc-n">01</span>
+          <div class="svc-main">
+            <h3>Product build</h3>
+            <p>The thing your audience buys. A training program, a course, a guide, a template pack. Written properly and designed to look like it's worth paying for.</p>
+          </div>
+          <span class="mono svc-price">from $600</span>
+        </article>
 
-      <div class="svc svc-feature">
-        <div class="svc-top">
-          <span class="svc-n">02</span>
-          <span class="svc-price">from $1,500</span>
-        </div>
-        <h3>Launch kit</h3>
-        <p>Everything needed to go from nothing to selling. This is what GROUNDWORK is, and it's what most people should buy.</p>
-        <ul>
-          <li>The product itself</li>
-          <li>Sales page, live, with checkout</li>
-          <li>Five email launch sequence</li>
-          <li>Ten content scripts to drive traffic</li>
-          <li>Two revision rounds</li>
-        </ul>
-        <span class="svc-flag">Most common</span>
+        <article class="svc svc-on">
+          <span class="mono svc-n">02</span>
+          <div class="svc-main">
+            <h3>Launch kit <span class="chip mono">Most common</span></h3>
+            <p>All four pieces. The product, the sales page with checkout, the five email sequence, and ten content scripts. This is what GROUNDWORK is.</p>
+          </div>
+          <span class="mono svc-price">from $1,500</span>
+        </article>
+
+        <article class="svc">
+          <span class="mono svc-n">03</span>
+          <div class="svc-main">
+            <h3>Custom tool or site</h3>
+            <p>Something interactive. A quiz funnel, a calculator, a client portal, a proper site. Built from scratch, not assembled from a template.</p>
+          </div>
+          <span class="mono svc-price">from $1,000</span>
+        </article>
       </div>
 
-      <div class="svc">
-        <div class="svc-top">
-          <span class="svc-n">03</span>
-          <span class="svc-price">from $1,000</span>
-        </div>
-        <h3>Custom tool or site</h3>
-        <p>Something interactive. A quiz funnel, a calculator, a client portal, a proper site. Built from scratch, not assembled from a template.</p>
-        <ul>
-          <li>Designed and built to spec</li>
-          <li>Hosted and handed over</li>
-          <li>Scoped individually</li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="svc-note">
-      Anything larger gets quoted after a conversation. Half up front, half at delivery,
-      scope in writing so neither of us is guessing.
-    </p>
-  </section>
-
-  <!-- ============================ PROCESS ============================ -->
-  <section class="block" id="process">
-    <div class="eyebrow">How it runs</div>
-    <h2 class="section-h">Four steps, about a week.</h2>
-
-    <div class="proc">
-      <div class="proc-step">
-        <span class="proc-n">01</span>
-        <h3>A short call</h3>
-        <p>Twenty minutes. What you post, who follows you, what they keep asking for. I come out of it with a written scope and a fixed price.</p>
-      </div>
-      <div class="proc-step">
-        <span class="proc-n">02</span>
-        <h3>I build the product</h3>
-        <p>You review one draft. This is the part that would have taken you a month of evenings, and it's the reason the rest of it is possible.</p>
-      </div>
-      <div class="proc-step">
-        <span class="proc-n">03</span>
-        <h3>Page and launch assets</h3>
-        <p>Sales page goes live with checkout wired up. Emails and content scripts written in your voice, not mine.</p>
-      </div>
-      <div class="proc-step">
-        <span class="proc-n">04</span>
-        <h3>You launch</h3>
-        <p>You get everything, including the files. Two revision rounds are included. After that you own it outright and you keep every dollar it makes.</p>
-      </div>
+      <p class="fine">
+        Half up front, half at delivery. Scope in writing and two revision rounds, so neither
+        of us is guessing. Anything larger gets quoted after a conversation.
+      </p>
     </div>
   </section>
 
   <!-- ============================ FIT ============================ -->
   <section class="block" id="fit">
-    <div class="fit-grid">
-      <div class="fit-col">
-        <div class="eyebrow">Good fit</div>
-        <ul class="fit-list fit-yes">
+    <div class="wrap fit-wrap">
+      <div>
+        <p class="eyebrow mono">Good fit</p>
+        <ul class="fit yes">
           <li>You have an audience, roughly 5K and up, that actually engages</li>
           <li>People ask you for something you can't currently sell them</li>
           <li>You know what you're good at and can explain it in a call</li>
           <li>You want to own the product outright, not rent a platform</li>
         </ul>
       </div>
-      <div class="fit-col">
-        <div class="eyebrow">Bad fit</div>
-        <ul class="fit-list fit-no">
+      <div>
+        <p class="eyebrow mono">Bad fit</p>
+        <ul class="fit no">
           <li>You want someone to grow the audience. I don't do that, and be careful with anyone who says they can</li>
-          <li>You want it in two days. Rushed products are the reason people distrust digital products</li>
-          <li>You're not sure what you'd even sell. Come back when you are, it'll be a better build</li>
+          <li>You want it in two days. Rushed products are why people distrust digital products</li>
+          <li>You're not sure what you'd sell. Come back when you are, it'll be a better build</li>
           <li>You want me to take a cut of sales instead of a fee. I build it, you keep it</li>
         </ul>
       </div>
@@ -296,49 +253,51 @@
   </section>
 
   <!-- ============================ CONTACT ============================ -->
-  <section class="cta-section" id="contact">
-    <div class="cta-inner">
-      <div class="cta-left">
-        <div class="eyebrow">Start a project</div>
-        <h2 class="section-h">Tell me what your audience keeps asking for.</h2>
-        <p class="section-p">
-          That's genuinely the whole first message. If there's a fit I'll come back with a
-          scope and a price. If there isn't, I'll say so.
+  <section class="contact" id="contact">
+    <div class="wrap contact-wrap">
+      <div class="contact-left">
+        <p class="eyebrow mono">Start a project</p>
+        <h2 class="big">Tell me what your audience <em>keeps asking for.</em></h2>
+        <p class="lede">
+          That's the whole first message. If there's a fit I'll come back with a scope and a
+          price. If there isn't, I'll say so.
         </p>
-        <div class="cta-direct">
-          <span>Or email directly</span>
+        <div class="direct">
+          <span class="mono">Or email directly</span>
           <a href="mailto:agincubate@gmail.com">agincubate@gmail.com</a>
         </div>
       </div>
 
-      <form id="contact-form" class="cta-form">
+      <form id="contact-form" class="form">
         <div class="field">
-          <label for="f-name">Name</label>
+          <label class="mono" for="f-name">Name</label>
           <input id="f-name" name="name" type="text" required autocomplete="name" />
         </div>
         <div class="field">
-          <label for="f-business">Instagram or where you post</label>
+          <label class="mono" for="f-business">Instagram or where you post</label>
           <input id="f-business" name="business" type="text" required />
         </div>
         <div class="field">
-          <label for="f-email">Email</label>
+          <label class="mono" for="f-email">Email</label>
           <input id="f-email" name="email" type="email" required autocomplete="email" />
         </div>
         <div class="field">
-          <label for="f-message">What do people keep asking you for?</label>
+          <label class="mono" for="f-message">What do people keep asking you for?</label>
           <textarea id="f-message" name="message" rows="4" required></textarea>
         </div>
-        <button type="submit" id="form-btn" class="btn-primary btn-full">Send message</button>
-        <p id="form-status" class="form-status">Usually respond within a few hours.</p>
+        <button type="submit" id="form-btn" class="btn btn-full">Send message</button>
+        <p id="form-status" class="mono status">Usually respond within a few hours.</p>
       </form>
     </div>
   </section>
 
+  </main>
+
   <footer class="foot">
-    <div class="foot-row">
+    <div class="wrap foot-row">
       <span class="logo">AG<span>.</span></span>
       <span class="foot-note">Digital products built and launched for creators.</span>
-      <a href="mailto:agincubate@gmail.com" class="foot-mail">agincubate@gmail.com</a>
+      <a href="mailto:agincubate@gmail.com" class="mono foot-mail">agincubate@gmail.com</a>
     </div>
   </footer>
 
@@ -352,122 +311,145 @@
       bar.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
     }, { passive: true });
 
+    // ── THE KIT SEQUENCER (signature interaction) ─────────────────
+    // Four deliverables, each backed by a real screenshot of the GROUNDWORK
+    // build. Clicking a step swaps the stage. This is the offer explaining
+    // itself rather than a paragraph claiming something.
+    const SEQ = [
+      {
+        img: 'assets/cs-program.jpeg',
+        alt: 'The GROUNDWORK program document',
+        label: '01 · The product',
+        copy: "Forty-eight training sessions, written out in full and designed to look like something worth paying for. Prints to a clean PDF, which is what the buyer downloads.",
+        href: 'https://groundwork-demo-gamma.vercel.app/program.html'
+      },
+      {
+        img: 'assets/cs-sales.jpeg',
+        alt: 'The GROUNDWORK sales page',
+        label: '02 · The sales page',
+        copy: "Live, fast, and built around the one objection that matters. For GROUNDWORK that was proving it isn't another worthless PDF, so the page shows a real session and runs an interactive demo of the method.",
+        href: 'https://groundwork-demo-gamma.vercel.app'
+      },
+      {
+        img: 'assets/cs-emails.jpeg',
+        alt: 'The GROUNDWORK email sequence',
+        label: '03 · The emails',
+        copy: "Five emails over nine days. No countdowns and no fake scarcity, because the buyer has seen those and stopped believing them. These earn the sale by teaching instead.",
+        href: 'https://groundwork-demo-gamma.vercel.app/kit.html#emails'
+      },
+      {
+        img: 'assets/cs-scripts.jpeg',
+        alt: 'The GROUNDWORK content scripts',
+        label: '04 · The content',
+        copy: "Ten scripts with hooks, shot lists and captions, written in your voice. The first four never mention the product at all. They earn the right to sell in the fifth.",
+        href: 'https://groundwork-demo-gamma.vercel.app/kit.html#scripts'
+      }
+    ];
+
+    const seqTabs  = [...document.querySelectorAll('.seq-tab')];
+    const seqImg   = document.getElementById('seqImg');
+    const seqLabel = document.getElementById('seqLabel');
+    const seqCopy  = document.getElementById('seqCopy');
+    const seqLink  = document.getElementById('seqLink');
+    const seqShot  = document.querySelector('.seq-shot');
+
+    function setSeq(i) {
+      const s = SEQ[i];
+      seqTabs.forEach((t, n) => {
+        t.classList.toggle('is-on', n === i);
+        t.setAttribute('aria-selected', n === i ? 'true' : 'false');
+      });
+      seqShot.classList.add('swapping');
+      setTimeout(() => {
+        seqImg.src = s.img;
+        seqImg.alt = s.alt;
+        seqShot.classList.remove('swapping');
+      }, reduceMotion ? 0 : 180);
+      seqLabel.textContent = s.label;
+      seqCopy.textContent  = s.copy;
+      seqLink.href         = s.href;
+    }
+
+    seqTabs.forEach((t, i) => {
+      t.addEventListener('click', () => setSeq(i));
+      t.addEventListener('keydown', e => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        const next = (i + (e.key === 'ArrowRight' ? 1 : SEQ.length - 1)) % SEQ.length;
+        seqTabs[next].focus();
+        setSeq(next);
+      });
+    });
+
     if (!reduceMotion) {
       gsap.registerPlugin(ScrollTrigger);
 
-      // ── SECTION REVEALS ─────────────────────────────────────────
-      gsap.utils.toArray('.block, .stats-band, .cta-section').forEach(sec => {
+      gsap.utils.toArray('.block, .kit, .contact').forEach(sec => {
         gsap.from(sec, {
-          opacity: 0, y: 40, duration: 0.9, ease: 'power3.out',
-          scrollTrigger: { trigger: sec, start: 'top 82%' }
+          opacity: 0, y: 32, duration: 0.85, ease: 'power3.out',
+          scrollTrigger: { trigger: sec, start: 'top 84%' }
         });
       });
 
-      // ── HERO PARALLAX ───────────────────────────────────────────
-      gsap.to('.hero-left', {
-        y: -70, opacity: 0.35, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.4 }
-      });
-      gsap.to('.hero-right', {
-        y: -130, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.8 }
-      });
-
-      // ── CASE STUDY CARDS ────────────────────────────────────────
       gsap.utils.toArray('.cs-card').forEach((card, i) => {
         gsap.from(card, {
-          opacity: 0, y: 50, duration: 0.8, delay: i * 0.08, ease: 'power3.out',
-          scrollTrigger: { trigger: '.cs-grid', start: 'top 78%' }
+          opacity: 0, y: 40, duration: 0.7, delay: i * 0.07, ease: 'power3.out',
+          scrollTrigger: { trigger: '.cs-grid', start: 'top 80%' }
         });
       });
 
-      // ── PARALLAX CODE-CHAIN BACKGROUND ──────────────────────────
-      // Six vertical streams of real code tokens at different depths. Closer
-      // streams move faster, which is what sells the parallax.
-      const bgCvs = document.createElement('canvas');
-      bgCvs.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
-      document.body.prepend(bgCvs);
-      const bgCtx = bgCvs.getContext('2d');
-
-      let bW, bH;
-      function bgResize() { bW = bgCvs.width = window.innerWidth; bH = bgCvs.height = window.innerHeight; }
-      bgResize();
-      window.addEventListener('resize', bgResize);
-
-      const codePools = {
-        html: ['<section>','</div>','<header>','<nav>','<main>','</section>','<button>','<form>','<img />','<a href=','<ul>','<li>','</nav>','<article>','<footer>','<span>'],
-        css:  ['border-radius:','font-weight:','display:','padding:','margin:','transform:','position:','z-index:','overflow:','flex-direction:','background:','transition:','opacity:','@media','@keyframes','grid-template:'],
-        val:  ['16px','800','0.3s ease','1fr 1fr','relative','hidden','translateY(0)','flex','grid','#fff','100%','center','none','48px','rgba(0,0,0,0.1)','absolute'],
-        js:   ['const animate','=> {','scrollY','addEventListener','querySelectorAll','classList.add(','getBoundingClientRect()','requestAnimationFrame','gsap.to(','window.innerWidth','.forEach(el =>','return {'],
-      };
-
-      const streamDefs = [
-        { xF: 0.05,  speed: 0.75, color: '#60a5fa', type: 'html', size: 10 },
-        { xF: 0.20,  speed: 1.25, color: '#f59e0b', type: 'css',  size: 9  },
-        { xF: 0.37,  speed: 0.60, color: '#f97316', type: 'val',  size: 10 },
-        { xF: 0.56,  speed: 1.40, color: '#a78bfa', type: 'js',   size: 10 },
-        { xF: 0.72,  speed: 0.85, color: '#34d399', type: 'html', size: 9  },
-        { xF: 0.88,  speed: 1.15, color: '#f59e0b', type: 'css',  size: 10 },
-      ];
-
-      const STEP = 52;
-      const streams = streamDefs.map((s, si) => {
-        const pool = codePools[s.type];
-        const tokens = [];
-        for (let py = -120; py < 9600; py += STEP) {
-          tokens.push({ py, text: pool[(si * 11 + Math.floor((py + 120) / STEP)) % pool.length] });
-        }
-        return { ...s, tokens };
+      gsap.to('.hero-inner', {
+        y: -60, opacity: 0.25, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 }
       });
 
-      let bT = 0;
-      (function bgDraw() {
-        bgCtx.clearRect(0, 0, bW, bH);
-        bT += 0.003;
-        const sy = window.scrollY;
+      // ── CURSOR-REACTIVE DOT FIELD ──────────────────────────────
+      // A faint monochrome grid. Dots within reach of the cursor warm toward
+      // yellow. It is the only decoration on the page, so it stays quiet.
+      const cvs = document.createElement('canvas');
+      cvs.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
+      document.body.prepend(cvs);
+      const ctx = cvs.getContext('2d');
 
-        for (const stream of streams) {
-          const sway = Math.sin(bT * 0.35 + stream.xF * 9) * bW * 0.012;
-          const x    = bW * stream.xF + sway;
+      let W, H, dots = [];
+      const GAP = 42, REACH = 150;
 
-          bgCtx.font          = `${stream.size}px 'JetBrains Mono', 'Courier New', monospace`;
-          bgCtx.textBaseline  = 'middle';
-          bgCtx.strokeStyle   = stream.color;
-          bgCtx.fillStyle     = stream.color;
+      function build() {
+        W = cvs.width  = window.innerWidth;
+        H = cvs.height = window.innerHeight;
+        dots = [];
+        for (let x = GAP / 2; x < W; x += GAP)
+          for (let y = GAP / 2; y < H; y += GAP)
+            dots.push({ x, y });
+      }
+      build();
+      window.addEventListener('resize', build);
 
-          let prevVY = null;
+      let mx = -9999, my = -9999, tx = -9999, ty = -9999;
+      window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+      window.addEventListener('mouseleave', () => { tx = -9999; ty = -9999; });
 
-          for (const tok of stream.tokens) {
-            const vy = tok.py - sy * stream.speed;
-            if (vy < -80 || vy > bH + 80) { prevVY = vy; continue; }
+      (function draw() {
+        mx += (tx - mx) * 0.09;
+        my += (ty - my) * 0.09;
+        ctx.clearRect(0, 0, W, H);
 
-            const edge = Math.min(vy / 90, (bH - vy) / 90, 1);
+        for (const d of dots) {
+          const dist = Math.hypot(d.x - mx, d.y - my);
+          const near = Math.max(0, 1 - dist / REACH);
+          const r = 0.8 + near * 1.5;
 
-            if (prevVY !== null && Math.abs(vy - prevVY) < bH * 0.55) {
-              bgCtx.globalAlpha = 0.07 * edge;
-              bgCtx.lineWidth   = 0.6;
-              bgCtx.beginPath();
-              bgCtx.moveTo(x, prevVY);
-              bgCtx.lineTo(x, vy);
-              bgCtx.stroke();
-            }
-
-            bgCtx.globalAlpha = 0.28 * edge;
-            bgCtx.beginPath();
-            bgCtx.arc(x, vy, 1.8, 0, Math.PI * 2);
-            bgCtx.fill();
-
-            bgCtx.globalAlpha = 0.20 * edge;
-            bgCtx.fillText(tok.text, x + 10, vy);
-
-            prevVY = vy;
+          if (near > 0.02) {
+            ctx.fillStyle = `rgba(240, 222, 60, ${0.10 + near * 0.55})`;
+          } else {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.055)';
           }
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+          ctx.fill();
         }
-
-        requestAnimationFrame(bgDraw);
+        requestAnimationFrame(draw);
       })();
-
-      gsap.to('.hero-orb', { x: 100, y: -70, duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     }
 
     // ── CONTACT FORM ──────────────────────────────────────────────
@@ -493,14 +475,13 @@
             message:  form.message.value.trim()
           })
         });
-
         const data = await res.json();
 
         if (res.ok) {
           form.reset();
           btn.textContent = 'Sent';
           status.textContent = "Got it. I'll be in touch within a few hours.";
-          status.style.color = 'var(--blue)';
+          status.style.color = 'var(--yellow)';
           setTimeout(() => { btn.textContent = 'Send message'; btn.disabled = false; }, 4000);
         } else {
           throw new Error(data.error || 'Unknown error');
@@ -509,16 +490,14 @@
         btn.textContent = 'Send message';
         btn.disabled = false;
         status.textContent = err.message || 'Something went wrong. Email agincubate@gmail.com directly.';
-        status.style.color = '#e05050';
+        status.style.color = '#e56b6b';
       }
     });
 
     // ── PAYMENT SUCCESS TOAST ─────────────────────────────────────
-    // Deposits are sent as Stripe links after scoping, not bought off the page,
-    // but the return URL still lands here.
     if (new URLSearchParams(location.search).get('payment') === 'success') {
       const toast = document.createElement('div');
-      toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-weight:700;font-size:14px;padding:14px 28px;border-radius:100px;z-index:999;box-shadow:0 8px 32px rgba(249,115,22,0.4);';
+      toast.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#f0de3c;color:#111;font-weight:700;font-size:14px;padding:14px 28px;border-radius:4px;z-index:999;';
       toast.textContent = 'Payment received. I\'ll be in touch within a few hours.';
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 6000);
