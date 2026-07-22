@@ -3,10 +3,12 @@ export default async function handler(req, res) {
 
   const { plan } = req.body;
 
+  // Deposits are sent as links after a project is scoped, not bought off the page.
+  // Amounts are the 50% deposit on each starting price.
   const plans = {
-    starter:  { name: 'Essentials — 50% Deposit', amount: 25000, mode: 'payment' },
-    standard: { name: 'Standard — 50% Deposit',   amount: 75000, mode: 'payment' },
-    growth:   { name: 'Growth Plan',               amount:  9900, mode: 'subscription' },
+    product: { name: 'Product Build, 50% deposit', amount: 30000, mode: 'payment' },
+    launch:  { name: 'Launch Kit, 50% deposit',    amount: 75000, mode: 'payment' },
+    custom:  { name: 'Custom Build, 50% deposit',  amount: 50000, mode: 'payment' },
   };
 
   const selected = plans[plan];
