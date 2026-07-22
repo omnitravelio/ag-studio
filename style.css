@@ -267,9 +267,27 @@ nav a:hover { color: var(--paper); }
 .big { font-size: clamp(32px, 5vw, 60px); line-height: 1.04; margin-bottom: 20px; }
 
 /* ---------- CASE STUDY ---------- */
+
+/* Each build gets its own article so two can sit in one Work section
+   without the meta rows and screenshot grids running together. */
+.case { margin-top: 72px; }
+.case:first-of-type { margin-top: 56px; }
+.case-h {
+  display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-2);
+}
+.case-n { font-size: 11px; color: var(--yellow); letter-spacing: 0.1em; }
+.case-h h3 {
+  font-size: clamp(26px, 3.4vw, 38px);
+  font-weight: 700; letter-spacing: -0.03em;
+  margin-right: auto;
+}
+.case-h .chip { margin-left: 0; vertical-align: baseline; }
+
 .cs {
   display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 48px;
-  margin-top: 44px; padding-top: 34px; border-top: 1px solid var(--line);
+  margin-top: 32px;
 }
 .cs-meta > div {
   display: flex; justify-content: space-between; gap: 16px;
