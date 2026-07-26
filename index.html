@@ -11,9 +11,11 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 </head>
 <body>
   <div class="scroll-bar"></div>
+  <div class="grain" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
 
   <nav>
@@ -48,7 +50,7 @@
       <dl class="hero-facts">
         <div><dt class="mono">Deliverables</dt><dd class="mono">4</dd></div>
         <div><dt class="mono">Turnaround</dt><dd class="mono">~1 week</dd></div>
-        <div><dt class="mono">From</dt><dd class="mono">$600</dd></div>
+        <div><dt class="mono">From</dt><dd class="mono">$500</dd></div>
       </dl>
     </div>
   </section>
@@ -437,6 +439,24 @@
     if (!reduceMotion) {
       gsap.registerPlugin(ScrollTrigger);
 
+      // ── LENIS SMOOTH SCROLL (the real library, not a clone) ───────
+      if (window.Lenis) {
+        const lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+        document.documentElement.style.scrollBehavior = 'auto';
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(t => lenis.raf(t * 1000));
+        gsap.ticker.lagSmoothing(0);
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+          a.addEventListener('click', e => {
+            const id = a.getAttribute('href');
+            if (id.length > 1) {
+              const target = document.querySelector(id);
+              if (target) { e.preventDefault(); lenis.scrollTo(target); }
+            }
+          });
+        });
+      }
+
       gsap.utils.toArray('.block, .kit, .contact').forEach(sec => {
         gsap.from(sec, {
           opacity: 0, y: 32, duration: 0.85, ease: 'power3.out',
@@ -482,13 +502,19 @@
       window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
       window.addEventListener('mouseleave', () => { tx = -9999; ty = -9999; });
 
+      // Continuous ambient undulation so the field always breathes,
+      // independent of the cursor. Cursor still warms nearby dots yellow.
+      let dt = 0;
       (function draw() {
+        dt += 0.008;
         mx += (tx - mx) * 0.09;
         my += (ty - my) * 0.09;
         ctx.clearRect(0, 0, W, H);
 
         for (const d of dots) {
-          const dist = Math.hypot(d.x - mx, d.y - my);
+          const dx = d.x + Math.sin(dt + d.y * 0.025) * 3.2;
+          const dy = d.y + Math.cos(dt + d.x * 0.025) * 3.2;
+          const dist = Math.hypot(dx - mx, dy - my);
           const near = Math.max(0, 1 - dist / REACH);
           const r = 0.8 + near * 1.5;
 
@@ -498,11 +524,43 @@
             ctx.fillStyle = 'rgba(255, 255, 255, 0.055)';
           }
           ctx.beginPath();
-          ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
+          ctx.arc(dx, dy, r, 0, Math.PI * 2);
           ctx.fill();
         }
         requestAnimationFrame(draw);
       })();
+
+      // ── 3D CARD TILT (pointer devices only) ───────────────────────
+      if (matchMedia('(pointer: fine)').matches) {
+        document.querySelectorAll('.price-card, .cs-card').forEach(card => {
+          const max = card.classList.contains('cs-card') ? 6 : 9;
+          card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transition = 'transform 0s';
+            card.style.transform =
+              `perspective(900px) rotateX(${(-py * max).toFixed(2)}deg) rotateY(${(px * max).toFixed(2)}deg) translateY(-4px)`;
+            card.style.setProperty('--mx', `${((px + 0.5) * 100).toFixed(1)}%`);
+            card.style.setProperty('--my', `${((py + 0.5) * 100).toFixed(1)}%`);
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transition = '';
+            card.style.transform = '';
+          });
+        });
+
+        // ── MAGNETIC HERO CTA ───────────────────────────────────────
+        const magnet = document.querySelector('.hero-ctas .btn');
+        if (magnet) {
+          magnet.addEventListener('mousemove', e => {
+            const r = magnet.getBoundingClientRect();
+            magnet.style.transform =
+              `translate(${((e.clientX - r.left - r.width / 2) * 0.3).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * 0.3).toFixed(1)}px)`;
+          });
+          magnet.addEventListener('mouseleave', () => { magnet.style.transform = ''; });
+        }
+      }
     }
 
     // ── CONTACT FORM ──────────────────────────────────────────────
