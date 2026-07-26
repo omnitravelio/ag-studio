@@ -362,9 +362,15 @@
 
     // ── SCROLL PROGRESS ───────────────────────────────────────────
     const bar = document.querySelector('.scroll-bar');
+    // Cache page height. Reading scrollHeight forces a layout, so never do
+    // it per-scroll or per-frame — recompute only on resize / load.
+    let pageH = document.documentElement.scrollHeight - window.innerHeight;
+    const recalcPageH = () => { pageH = document.documentElement.scrollHeight - window.innerHeight; };
+    window.addEventListener('resize', recalcPageH, { passive: true });
+    window.addEventListener('load', recalcPageH);
+    setTimeout(recalcPageH, 600);
     window.addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.transform = `scaleX(${h > 0 ? window.scrollY / h : 0})`;
+      bar.style.transform = `scaleX(${pageH > 0 ? window.scrollY / pageH : 0})`;
     }, { passive: true });
 
     // ── THE KIT SEQUENCER (signature interaction) ─────────────────
@@ -543,8 +549,7 @@
         });
 
         (function loop() {
-          const maxScroll = document.documentElement.scrollHeight - innerHeight;
-          const prog = maxScroll > 0 ? Math.min(1, Math.max(0, scrollY / maxScroll)) : 0;
+          const prog = pageH > 0 ? Math.min(1, Math.max(0, scrollY / pageH)) : 0;
           const targetZ = 560 - prog * 1080;              // fly forward through the cloud
           camZ += (targetZ - camZ) * 0.06;
           cam.position.z = camZ;
