@@ -338,6 +338,7 @@ nav a:hover { color: var(--paper); }
 .svc-price { font-size: 15px; color: var(--paper); font-weight: 500; white-space: nowrap; padding-top: 6px; }
 .svc-on .svc-price { color: var(--yellow); }
 .svc-on .svc-n { color: var(--yellow); }
+.svc-main .svc-pay { font-size: 13px; color: var(--yellow); margin-top: 10px; max-width: none; }
 
 /* ---------- FIT ---------- */
 .fit-wrap { display: grid; grid-template-columns: repeat(2, 1fr); gap: 56px; }
