@@ -441,7 +441,7 @@
 
       // ── LENIS SMOOTH SCROLL (the real library, not a clone) ───────
       if (window.Lenis) {
-        const lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
+        const lenis = new Lenis({ lerp: 0.11, wheelMultiplier: 1.25 });
         document.documentElement.style.scrollBehavior = 'auto';
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add(t => lenis.raf(t * 1000));
@@ -457,19 +457,39 @@
         });
       }
 
-      gsap.utils.toArray('.block, .kit, .contact').forEach(sec => {
-        gsap.from(sec, {
-          opacity: 0, y: 32, duration: 0.85, ease: 'power3.out',
-          scrollTrigger: { trigger: sec, start: 'top 84%' }
-        });
+      // ── SCROLL REVEALS — pieces slide in individually, staggered ──
+      const rev = { opacity: 0, y: 34, duration: 0.7, ease: 'power3.out' };
+
+      // eyebrow -> heading -> lede, per section head
+      gsap.utils.toArray('.eyebrow').forEach(eb => {
+        const grp = [eb, eb.nextElementSibling, eb.nextElementSibling && eb.nextElementSibling.nextElementSibling]
+          .filter(el => el && el.matches('.eyebrow, .big, h2, .lede'));
+        gsap.from(grp, { ...rev, stagger: 0.1, scrollTrigger: { trigger: eb, start: 'top 86%' } });
       });
 
-      gsap.utils.toArray('.cs-card').forEach((card, i) => {
-        gsap.from(card, {
-          opacity: 0, y: 40, duration: 0.7, delay: i * 0.07, ease: 'power3.out',
-          scrollTrigger: { trigger: '.cs-grid', start: 'top 80%' }
-        });
+      // the kit sequencer
+      gsap.from('.kit-lede', { ...rev, scrollTrigger: { trigger: '.kit', start: 'top 78%' } });
+      gsap.from('.seq-tab', { ...rev, y: 24, stagger: 0.08, scrollTrigger: { trigger: '.seq', start: 'top 82%' } });
+      gsap.from('.seq-stage', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.seq', start: 'top 80%' } });
+
+      // case studies — header, body, then each card
+      gsap.utils.toArray('.case').forEach(c => {
+        gsap.from(c.querySelectorAll('.case-h, .cs, .cs-card'),
+          { ...rev, stagger: 0.08, scrollTrigger: { trigger: c, start: 'top 80%' } });
       });
+
+      // pricing cards
+      gsap.from('.price-card', { ...rev, y: 46, stagger: 0.12, scrollTrigger: { trigger: '.price-grid', start: 'top 82%' } });
+
+      // good / bad fit lists, item by item
+      gsap.utils.toArray('.fit').forEach(list => {
+        gsap.from(list.querySelectorAll('li'),
+          { opacity: 0, x: -18, duration: 0.55, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: list, start: 'top 86%' } });
+      });
+
+      // contact
+      gsap.from('.contact-left > *, .contact .form',
+        { ...rev, stagger: 0.07, scrollTrigger: { trigger: '.contact', start: 'top 80%' } });
 
       gsap.to('.hero-inner', {
         y: -60, opacity: 0.25, ease: 'none',
@@ -485,7 +505,7 @@
       const ctx = cvs.getContext('2d');
 
       let W, H, dots = [];
-      const GAP = 42, REACH = 150;
+      const GAP = 50, REACH = 150;
 
       function build() {
         W = cvs.width  = window.innerWidth;
@@ -545,7 +565,7 @@
             card.style.setProperty('--my', `${((py + 0.5) * 100).toFixed(1)}%`);
           });
           card.addEventListener('mouseleave', () => {
-            card.style.transition = '';
+            card.style.transition = 'transform 0.4s var(--ease)';
             card.style.transform = '';
           });
         });

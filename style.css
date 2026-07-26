@@ -343,9 +343,9 @@ nav a:hover { color: var(--paper); }
 .price-card {
   border: 1px solid var(--line); background: var(--void-3); border-radius: 8px;
   padding: 28px 26px; display: flex; flex-direction: column;
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  transition: border-color 0.3s var(--ease);
 }
-.price-card:hover { border-color: var(--line-2); transform: translateY(-3px); }
+.price-card:hover { border-color: var(--line-2); }
 .price-card.is-feature { border-color: var(--yellow); }
 .price-tag { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 22px; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--grey-2); }
 .price-card.is-feature .price-tag { color: var(--yellow); }
@@ -360,7 +360,7 @@ nav a:hover { color: var(--paper); }
 /* ---------- MOTION / DEPTH ---------- */
 .grain {
   position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  opacity: 0.32; mix-blend-mode: overlay;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 170px 170px;
 }
